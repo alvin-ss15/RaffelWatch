@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "814428477857",
+    "firebase_url": "https://raffelwatch-5607b.firebaseio.com",
+    "project_id": "raffelwatch-5607b",
+    "storage_bucket": "raffelwatch-5607b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814428477857:android:9bf5b8e757cd5f8ce8d3e0",
+        "android_client_info": {
+          "package_name": "com.example.raffelwatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814428477857-omtui9uproa2m7bv0o1m5ejaghkqgj2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbE7eb6Phpu_5vFBCbgFL1kRoPoRvlWmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814428477857-omtui9uproa2m7bv0o1m5ejaghkqgj2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
