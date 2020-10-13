@@ -3,8 +3,8 @@ package com.example.raffelwatch;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.icu.text.DecimalFormat;
+
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,38 +13,53 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.Random;
+import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Handler handler = new Handler();
+        Timer timerSensor = new Timer();
 
-        Runnable runnableCode = new Runnable() {
-            @Override
+        TimerTask taskProcessSensor = new TimerTask() {
             public void run() {
                 boolean isWatered = false;
                 double temp = tempGen();
                 double humid = humidGen(isWatered);
                 double pH = phGen();
-                double illumi = illumiGen();
+                double lumin = luminGen();
 
-                Log.d("Debug", "Temp: "+ temp + ", Humid: " + humid + ", pH: " + pH + ", Illumi: " + illumi);
-                final handler.postDelayed(this,5000); // Execution Period: 5 mins
+                Date now = new Date();
+                String current;
+                TimeZone.setDefault(TimeZone.getTimeZone("Europe/Berlin"));
+                current = now.toString();
 
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference("Plants");
+
+                Plants plants = new Plants(current, temp, humid, pH, lumin);
+                reference.push().setValue(plants);
+
+                Log.d("Debug", "Timestamp: " + current + ", Temp: "+ temp + ", Humid: " + humid + ", pH: " + pH + ", Lumin: " + lumin);
             }
         };
-        handler.postDelayed(runnableCode,5000); // Execution Period: 5 mins
+        timerSensor.schedule(taskProcessSensor, 0, 600000); // Get value every 10 minutes
+
 
         Toast.makeText(MainActivity.this, "Firebase connection Success", Toast.LENGTH_LONG).show();
     }
+
+
 
     // Temperature Sensor Value Generator
     public double tempGen() {
@@ -66,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         if(isWatered == false) {
             val = val * 4 + 17.5; // (SD:4, Mean: 17.5)
             val = Double.parseDouble(new DecimalFormat("##.##").format(val));
+
         }
         // After Watering
         else {
@@ -85,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
         return val;
     }
 
-    // Illuminance Sensor Value Generator
-    public double illumiGen() {
+    // Luminance Sensor Value Generator
+    public double luminGen() {
 
-        LocalTime time = LocalTime.now(ZoneId.of("Europe/Paris"));
+        LocalTime time = LocalTime.now(ZoneId.of("Europe/Berlin"));
 
-        Random illumi = new Random();
-        double val = illumi.nextGaussian();
+        Random lumin = new Random();
+        double val = lumin.nextGaussian();
 
         int currentHour = time.getHour();
 
@@ -106,8 +122,17 @@ public class MainActivity extends AppCompatActivity {
         return val;
     }
 
-    public void sendData() {
-
-//        String dataFieldText = dataField.getText().
+    public boolean streakCount() {
+        boolean isWatered
+        if (isWatered = )
+        return val;
     }
+    public int toWater(boolean isWatered){
+        isWatered = true;
+        if
+        int val = 10
+    }
+
+
+
 }
