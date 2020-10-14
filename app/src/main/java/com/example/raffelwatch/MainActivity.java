@@ -6,6 +6,8 @@ import android.icu.text.DecimalFormat;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +20,7 @@ import java.util.Random;
 import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+//        setContentView(R.layout.activity_login);
+//        loadingProgressBar.setVisibility(View.VISIBLE);
+//        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+//        loadingProgressBar.setVisibility(View.GONE);
 
         Timer timerSensor = new Timer();
 
@@ -47,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("Plants");
 
-                Plants plants = new Plants(current, temp, humid, pH, lumin);
-                reference.push().setValue(plants);
+//                Plants plants = new Plants(current, temp, humid, pH, lumin);
+//                reference.push().setValue(plants);
 
                 Log.d("Debug", "Timestamp: " + current + ", Temp: "+ temp + ", Humid: " + humid + ", pH: " + pH + ", Lumin: " + lumin);
             }
         };
-        timerSensor.schedule(taskProcessSensor, 0, 600000); // Get value every 10 minutes
-
-
-        Toast.makeText(MainActivity.this, "Firebase connection Success", Toast.LENGTH_LONG).show();
+//        timerSensor.schedule(taskProcessSensor, 0, 600000); // Get value every 10 minutes
+//
+//
+//        Toast.makeText(MainActivity.this, "Firebase connection Success", Toast.LENGTH_LONG).show();
     }
 
 
@@ -122,16 +131,16 @@ public class MainActivity extends AppCompatActivity {
         return val;
     }
 
-    public boolean streakCount() {
-        boolean isWatered
-        if (isWatered = )
-        return val;
-    }
-    public int toWater(boolean isWatered){
-        isWatered = true;
-        if
-        int val = 10
-    }
+//    public boolean streakCount() {
+//        boolean isWatered
+//        if (isWatered = )
+//        return val;
+//    }
+//    public int toWater(boolean isWatered){
+//        isWatered = true;
+//        if
+//        int val = 10
+//    }
 
 
 
